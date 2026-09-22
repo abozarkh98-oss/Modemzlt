@@ -3,172 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خرید بسته - ZLT X28</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <title>فروشگاه آنلاین RGB</title>
     <style>
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #080c14; color: #f3f4f6; }
-        
-        @keyframes rgb-rotate {
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tahoma', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-color: #0d0d13;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* هدر با استایل نئونی RGB */
+        header {
+            width: 100%;
+            background: rgba(20, 20, 30, 0.9);
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, #ff0055, #00e5ff, #7600ff, #ff0055) 1;
+            animation: rgb-border 4s linear infinite;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
+
+        @keyframes rgb-border {
             0% { filter: hue-rotate(0deg); }
             100% { filter: hue-rotate(360deg); }
         }
 
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00e5ff;
+            text-shadow: 0 0 10px #00e5ff;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            border-color: #ff0055;
+            box-shadow: 0 0 10px #ff0055;
+            color: #ff0055;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+            background: #161622;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(118, 0, 255, 0.2);
+            border: 1px solid #2a2a3d;
+        }
+
         .rgb-card {
-            position: relative;
-            background: #0f172a;
-            border-radius: 1.25rem;
-            z-index: 1;
+            background: #1c1c2b;
+            border: 2px solid #2a2a40;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: 0.3s;
         }
 
-        .rgb-card::before {
-            content: '';
-            position: absolute;
-            top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #ff0055, #7600ff, #00d4ff, #00ff66, #ff0055);
-            background-size: 400% 400%;
-            border-radius: 1.35rem;
-            z-index: -1;
-            animation: rgb-rotate 4s linear infinite;
-            opacity: 0.85;
-            transition: opacity 0.3s ease;
+        .rgb-card:hover {
+            border-color: #00e5ff;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
-        .rgb-card:hover::before {
-            opacity: 1;
-            filter: blur(4px);
+        .btn {
+            background: linear-gradient(45deg, #ff0055, #7600ff);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.4);
         }
 
-        .rgb-btn {
-            background: linear-gradient(90deg, #ff0055, #7600ff, #00d4ff);
-            background-size: 200% 200%;
-            animation: rgb-rotate 3s linear infinite;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.8);
         }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            background: #0d0d13;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 6px;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #00e5ff;
+            box-shadow: 0 0 8px #00e5ff;
+        }
+
+        .alert-error {
+            padding: 12px;
+            background: rgba(255, 0, 85, 0.15);
+            border: 1px solid #ff0055;
+            color: #ff0055;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            padding: 12px;
+            background: rgba(0, 225, 255, 0.15);
+            border: 1px solid #00e5ff;
+            color: #00e5ff;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #2a2a3d;
+        }
+
+        th { color: #00e5ff; }
     </style>
 </head>
-<body class="min-h-screen pb-12">
+<body>
 
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <h1 class="text-lg font-bold text-cyan-400">سامانه شارژ مودم ZLT X28</h1>
-            <a href="/admin/dashboard" class="text-xs bg-slate-800 text-slate-300 px-3 py-2 rounded-xl">پنل مدیریت</a>
-        </div>
+    <header>
+        <div class="logo">فروشگاه RGB</div>
+        <nav>
+            <a href="/">صفحه اصلی</a>
+            {% if session.get('user') %}
+                <span>کاربر: {{ session['user'] }}</span>
+                {% if session.get('role') == 'admin' %}
+                    <a href="/admin" style="border-color: #00e5ff;">مدیریت</a>
+                {% endif %}
+                <a href="/logout">خروج</a>
+            {% else %}
+                <a href="/login">ورود کاربر</a>
+                <a href="/admin/login">ورود مدیریت</a>
+            {% endif %}
+        </nav>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 mt-8 space-y-10">
+    <div class="container">
+        <!-- نمایش پیام‌ها -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        <!-- Announcement Alert -->
-        <div id="announcementBox" class="hidden animate__animated animate__bounceIn">
-            <div class="bg-indigo-950/80 border border-indigo-500/50 rounded-2xl p-4 flex items-center gap-4">
-                <span class="text-2xl animate-bounce">📢</span>
-                <div>
-                    <h4 class="font-bold text-indigo-300 text-sm">اطلاعیه مهم</h4>
-                    <p id="announcementText" class="text-xs text-slate-300"></p>
-                </div>
+        <!-- ۱. صفحه اصلی / محصولات -->
+        {% if page == 'home' %}
+            <h2>محصولات ویژه</h2>
+            <div class="rgb-card">
+                <h3>اشتراک ویژه‌ RGB</h3>
+                <p>قیمت: ۱۰۰,۰۰۰ تومان</p>
+                <br>
+                {% if session.get('user') %}
+                    <form action="/order" method="POST">
+                        <button type="submit" class="btn">ثبت سفارش</button>
+                    </form>
+                {% else %}
+                    <p style="color: #ff0055; margin-bottom: 15px;">قبل از خرید باید وارد حساب کاربری خود شوید.</p>
+                    <a href="/login" class="btn">ورود به حساب جهت خرید</a>
+                {% endif %}
             </div>
-        </div>
 
-        <section class="text-center space-y-2">
-            <h2 class="text-2xl sm:text-3xl font-black">انتخاب و خرید آنلاین بسته</h2>
-            <p class="text-xs text-slate-400">بسته مورد نظر خود را انتخاب کرده و سفارش را ثبت کنید.</p>
-        </section>
+        <!-- ۲. فرم ورود کاربران -->
+        {% elif page == 'login' %}
+            <h2>ورود به حساب کاربری</h2>
+            <form method="POST" action="/login">
+                <label>نام کاربری:</label>
+                <input type="text" name="username" placeholder="نام کاربری را وارد کنید" required>
+                
+                <label>رمز عبور:</label>
+                <input type="password" name="password" placeholder="رمز عبور را وارد کنید" required>
+                
+                <button type="submit" class="btn">ورود</button>
+            </form>
 
-        <!-- Packages Grid -->
-        <div id="packagesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- بسته‌ها به صورت دینامیک اضافه می‌شوند -->
-        </div>
+        <!-- ۳. فرم ورود ادمین -->
+        {% elif page == 'admin_login' %}
+            <h2>ورود به پنل مدیریت</h2>
+            <form method="POST" action="/admin/login">
+                <label>نام کاربری مدیر:</label>
+                <input type="text" name="username" required>
+                
+                <label>رمز عبور مدیر:</label>
+                <input type="password" name="password" required>
+                
+                <button type="submit" class="btn">ورود به مدیریت</button>
+            </form>
 
-    </main>
+        <!-- ۴. پنل ادمین -->
+        {% elif page == 'admin' %}
+            <h2>پنل مدیریت</h2>
+            
+            <div class="rgb-card">
+                <h3>ساخت کاربر جدید توسط ادمین</h3>
+                <form method="POST" action="/admin/create_user">
+                    <label>نام کاربری:</label>
+                    <input type="text" name="new_username" required>
+                    
+                    <label>رمز عبور:</label>
+                    <input type="password" name="new_password" required>
+                    
+                    <button type="submit" class="btn">ایجاد کاربر</button>
+                </form>
+            </div>
 
-    <script>
-        async function loadPackages() {
-            const res = await fetch('/api/packages');
-            const packages = await res.json();
-            const container = document.getElementById('packagesContainer');
-            container.innerHTML = '';
+            <div class="rgb-card">
+                <h3>لیست کاربران تاییدشده</h3>
+                <ul>
+                    {% for u in users %}
+                        <li><strong>{{ u }}</strong> (نقش: {{ users[u]['role'] }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-            packages.forEach(p => {
-                let finalPrice = p.price;
-                let discountBadge = '';
-                let originalPriceHtml = '';
+            <div class="rgb-card">
+                <h3>لیست سفارش‌ها</h3>
+                {% if orders %}
+                    <table>
+                        <tr>
+                            <th>نام کاربری</th>
+                            <th>محصول سفارش داده شده</th>
+                        </tr>
+                        {% for order in orders %}
+                            <tr>
+                                <td>{{ order.user }}</td>
+                                <td>{{ order.item }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% else %}
+                    <p>هنوز سفارشی ثبت نشده است.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
 
-                if (p.discount > 0) {
-                    finalPrice = p.price * (1 - p.discount / 100);
-                    discountBadge = `<span class="text-xs text-rose-400 bg-rose-950/80 border border-rose-800 px-2 py-0.5 rounded-full font-bold">${p.discount}% تخفیف</span>`;
-                    originalPriceHtml = `<span class="text-xs text-slate-500 line-through mr-2">${p.price.toLocaleString()}</span>`;
-                }
-
-                container.innerHTML += `
-                    <div class="rgb-card p-6 flex flex-col justify-between animate__animated animate__zoomIn">
-                        <div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-xs text-cyan-400 bg-cyan-950/60 border border-cyan-800 px-2.5 py-1 rounded-full">${p.category}</span>
-                                ${discountBadge}
-                            </div>
-                            <h3 class="text-lg font-bold text-white mt-3">${p.name}</h3>
-                            <div class="mt-4 flex items-baseline">
-                                ${originalPriceHtml}
-                                <span class="text-2xl font-black text-amber-400">${Math.round(finalPrice).toLocaleString()}</span>
-                                <span class="text-xs text-slate-400 font-normal mr-1">تومان</span>
-                            </div>
-                        </div>
-                        <button onclick="openOrderModal('${p.name}', '${finalPrice}')" class="rgb-btn text-white font-bold py-3 rounded-xl mt-6 text-sm hover:scale-105 transition">
-                            سفارش بسته
-                        </button>
-                    </div>
-                `;
-            });
-        }
-
-        async function fetchAnnouncement() {
-            try {
-                const res = await fetch('/api/announcement');
-                const data = await res.json();
-                if (data.active && data.text) {
-                    document.getElementById('announcementText').innerText = data.text;
-                    document.getElementById('announcementBox').classList.remove('hidden');
-                }
-            } catch (err) {}
-        }
-
-        function openOrderModal(packageName, price) {
-            Swal.fire({
-                title: 'تایید و ثبت سفارش',
-                html: `
-                    <p class="text-sm text-slate-300 mb-2">خرید <b>${packageName}</b></p>
-                    <p class="text-sm text-amber-400 font-bold mb-4">مبلغ: ${parseInt(price).toLocaleString()} تومان</p>
-                    <input id="swal-user" class="swal2-input text-right text-sm" placeholder="نام و نام خانوادگی">
-                    <input id="swal-phone" class="swal2-input text-right text-sm" placeholder="شماره موبایل یا شناسه مودم">
-                `,
-                showCancelButton: true,
-                confirmButtonText: 'ثبت سفارش خرید',
-                cancelButtonText: 'انصراف',
-                confirmButtonColor: '#00d4ff',
-                preConfirm: () => {
-                    const user = document.getElementById('swal-user').value;
-                    const phone = document.getElementById('swal-phone').value;
-                    if (!user || !phone) Swal.showValidationMessage('لطفا تمام فیلدها را پر کنید');
-                    return { username: user, phone: phone, package: packageName, price: price }
-                }
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    const response = await fetch('/api/order', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(result.value)
-                    });
-                    const resData = await response.json();
-                    if (resData.success) {
-                        Swal.fire({ icon: 'success', title: 'سفارش ثبت شد', confirmButtonColor: '#10b981' });
-                    }
-                }
-            });
-        }
-
-        loadPackages();
-        fetchAnnouncement();
-    </script>
 </body>
-</html>
+                    </html>
