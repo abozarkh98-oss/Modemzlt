@@ -21,7 +21,6 @@
             align-items: center;
         }
 
-        /* هدر با استایل نئونی RGB */
         header {
             width: 100%;
             background: rgba(20, 20, 30, 0.9);
@@ -176,7 +175,6 @@
     </header>
 
     <div class="container">
-        <!-- نمایش پیام‌ها -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
@@ -185,11 +183,10 @@
             {% endif %}
         {% endwith %}
 
-        <!-- ۱. صفحه اصلی / محصولات -->
         {% if page == 'home' %}
             <h2>محصولات ویژه</h2>
             <div class="rgb-card">
-                <h3>اشتراک ویژه‌ RGB</h3>
+                <h3>محصول آنلاین RGB</h3>
                 <p>قیمت: ۱۰۰,۰۰۰ تومان</p>
                 <br>
                 {% if session.get('user') %}
@@ -202,7 +199,6 @@
                 {% endif %}
             </div>
 
-        <!-- ۲. فرم ورود کاربران -->
         {% elif page == 'login' %}
             <h2>ورود به حساب کاربری</h2>
             <form method="POST" action="/login">
@@ -215,7 +211,6 @@
                 <button type="submit" class="btn">ورود</button>
             </form>
 
-        <!-- ۳. فرم ورود ادمین -->
         {% elif page == 'admin_login' %}
             <h2>ورود به پنل مدیریت</h2>
             <form method="POST" action="/admin/login">
@@ -228,7 +223,6 @@
                 <button type="submit" class="btn">ورود به مدیریت</button>
             </form>
 
-        <!-- ۴. پنل ادمین -->
         {% elif page == 'admin' %}
             <h2>پنل مدیریت</h2>
             
